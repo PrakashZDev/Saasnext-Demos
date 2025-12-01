@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Heritage Loom | Premium Saree Collection</title>
+
+    <!-- 1. Bootstrap CDN (Latest) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 2. AOS CDN (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- 3. Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- 4. Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-cream: #fff8e1; /* Very light beige/cream */
+            --color-beige: #e9e6d8; /* Soft beige */
+            --color-dark: #3e3e3e; /* Dark typography */
+            --color-primary: #8a6a62; /* Subtle brown/earth tone for accent */
+        }
+        body {
+            background-color: var(--color-cream);
+            font-family: 'Playfair Display', serif;
+            color: var(--color-dark);
+            /* Padding for fixed header */
+            padding-top: 130px; 
+        }
+        /* Custom Typography */
+        .premium-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--color-dark);
+            text-transform: uppercase;
+        }
+
+        /* --- Header Styles --- */
+        #main-header {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            width: 100%;
+            z-index: 1030;
+        }
+        
+        /* Top Utility Bar */
+        #nav-top {
+            background-color: var(--color-dark);
+            color: white;
+            padding: 0.5rem 0;
+            height: 40px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        #nav-top .nav-link, #nav-top .navbar-text {
+            color: #d1d1d1 !important;
+            font-size: 0.85rem;
+        }
+
+        /* Main Navigation Bar */
+        #nav-main {
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .nav-link {
+            color: var(--color-dark) !important;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        /* Logo Styling */
+        #nav-main .navbar-brand {
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* --- SCROLLED STATE (Minimal Header) --- */
+
+        #main-header.scrolled {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 1. Hide Top Bar */
+        #main-header.scrolled #nav-top {
+            height: 0;
+            padding: 0;
+        }
+
+        /* 2. Shrink Main Bar Padding */
+        #main-header.scrolled #nav-main {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        
+        /* 3. Center the Logo */
+        @media (min-width: 992px) {
+             #main-header.scrolled #nav-main .navbar-brand {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 1.75rem;
+            }
+        }
+
+        /* 4. Hide Main Navigation Links */
+        #navbarNav.menu-hidden {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+        
+        /* Mobile Specific */
+        @media (max-width: 991.98px) {
+            #nav-main .navbar-collapse {
+                text-align: center;
+                margin-top: 1rem;
+            }
+            #main-header.scrolled #navbarNav {
+                display: none !important;
+            }
+        }
+
+        /* General Layout & Components */
+        .card, .navbar, .modal-content, .btn-primary {
+            border-radius: 12px;
+        }
+        .card {
+            border: none;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        /* --- Hero Section Styles (MODIFIED) --- */
+        .hero-section {
+            background: url('https://www.manyavar.com/on/demandware.static/-/Library-Sites-ManyavarSharedLibrary/default/dwe6547122/Ace_Your_Saree_Banner_D.jpg') center center / cover no-repeat;
+            height: 85vh;
+            /* Removed flex centering for absolute positioning */
+            position: relative;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0.1));
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            /* Positioned absolutely to the bottom-left corner */
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            
+            /* Transparent Background & Frosted Effect */
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            color: white; /* Changed text color to white for contrast */
+            text-align: left; /* Changed text alignment */
+
+            padding: 2.5rem;
+            border-radius: 12px;
+            max-width: 600px;
+            z-index: 1;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        /* Mobile adjustment */
+        @media (max-width: 768px) {
+            .hero-overlay {
+                bottom: 20px;
+                left: 20px;
+                right: 20px; /* Full width on small screens */
+            }
+        }
+        /* End Hero Section Styles */
+
+
+        .cta-button {
+            transition: transform 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.03);
+        }
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Filter specific styles */
+        .filter-options {
+            background-color: #f7f3ec; /* Slightly darker cream for contrast */
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+        .form-check-label {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .form-check-input:checked + .form-check-label {
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        /* --- Hover Effects --- */
+
+        /* Header Navigation Links */
+        .nav-link:hover {
+            color: var(--color-primary) !important;
+            text-decoration: underline;
+        }
+
+        /* Buttons in Sections */
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer Social Icons */
+        .footer-icon:hover {
+            color: var(--color-primary);
+            transform: scale(1.2);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Header & Navigation -->
+    <header class="fixed-top" id="main-header">
+        
+        <!-- 1. Top Utility/Announcement Bar -->
+        <nav class="navbar navbar-expand-lg" id="nav-top">
+            <div class="container-fluid container-lg">
+                <span class="navbar-text me-auto text-light d-none d-md-block">
+                    Free shipping on all orders over $300 | Use Code: LOOM300
+                </span>
+                <ul class="navbar-nav d-flex flex-row align-items-center ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#"><i class="fas fa-user-circle"></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">USD | EN</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- 2. Main Navigation Bar -->
+        <nav class="navbar navbar-expand-lg" id="nav-main">
+            <div class="container-fluid container-lg position-relative">
+                
+                <!-- Toggler (Mobile) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Logo -->
+                <a class="navbar-brand premium-heading fs-4 mx-auto mx-lg-0" href="#" id="main-logo">
+                    The <span style="color: var(--color-primary);">Loom</span>
+                </a>
+                
+                <!-- Main Links -->
+                <div class="collapse navbar-collapse order-lg-2" id="navbarNav">
+                    <ul class="navbar-nav mx-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link mx-2" href="#">New Arrivals</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="#products">Silk Weaves</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="#story">Cotton Handloom</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="#offers">Bridal Collection</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="#testimonials">Gifts & Accessories</a></li>
+                    </ul>
+                    <ul class="navbar-nav d-lg-none mt-3 border-top pt-3">
+                         <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-search"></i> Search</a></li>
+                         <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-circle"></i> Profile</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Right Utility Icons (Cart Counter Added) -->
+                <ul class="navbar-nav d-flex flex-row ms-auto order-lg-3">
+                    <li class="nav-item d-none d-lg-block">
+                        <a class="nav-link me-3" href="#"><i class="fas fa-search"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-outline-dark rounded-pill" id="cart-button">
+                            <i class="fas fa-shopping-cart"></i> 
+                            <span class="d-none d-md-inline">Cart</span> 
+                            (<span id="cart-count">0</span>) 
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section (MODIFIED STRUCTURE & CONTENT ALIGNMENT) -->
+        <section class="hero-section" id="hero">
+            <div class="container">
+                <!-- Removed mx-auto for absolute positioning. Text color changed to white/light. Button alignment changed to start. -->
+                <div class="hero-overlay" data-aos="fade-up">
+                    <h1 class="premium-heading display-3 mb-4 text-white" id="hero-headline" style="color: white !important;">
+                        Ace Your Saree Look
+                    </h1>
+                    <p class="lead mb-5" style="color: rgba(255, 255, 255, 0.9);">
+                        Discover the new wedding and festive collection. Timeless drapes for the modern woman.
+                    </p>
+                    <div class="d-flex justify-content-start gap-3">
+                        <button class="btn btn-primary btn-lg cta-button" onclick="document.getElementById('products').scrollIntoView({ behavior: 'smooth' })">Shop The New Collection</button>
+                        <!-- Secondary button changed to outline-light for contrast -->
+                        <button class="btn btn-outline-light btn-lg cta-button" data-bs-toggle="modal" data-bs-target="#productModal" data-product-id="0">View Showcase</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Our Story -->
+        <section class="py-5 py-lg-7 bg-white" id="story">
+            <div class="container container-lg">
+                <div class="row align-items-center">
+                    <div class="col-md-6 order-md-2" data-aos="fade-left">
+                        <img src="https://www.sougatpaul.com/cdn/shop/files/SP4935_1.jpg?v=1757758230&width=2048" alt="Handloom Weaving Process" class="img-fluid rounded-4 shadow-lg" style="height: 500px; width: 100%; object-fit: cover;">
+                    </div>
+                    <div class="col-md-6 order-md-1 mt-4 mt-md-0" data-aos="fade-right">
+                        <h2 class="premium-heading mb-4" style="color: var(--color-primary);">
+                            Our Story: Weaving Tradition
+                        </h2>
+                        <p class="lead">
+                            The Heritage Loom is dedicated to preserving the ancient art of handloom weaving. We work directly with master artisans across India.
+                        </p>
+                        <p class="text-muted">
+                            From the vibrant threads of Banaras to the meticulous designs of Kanchipuram, our collection celebrates the diversity of Indian textiles.
+                        </p>
+                        <a href="#" class="btn btn-sm btn-outline-dark mt-3">Read More About Our Mission</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Grid Section with Filters -->
+        <section class="py-5 py-lg-7" id="products">
+            <div class="container container-lg">
+                <h2 class="premium-heading text-center mb-5" data-aos="fade-down">
+                    Our Curated Collection
+                </h2>
+
+                <div class="row">
+                    <!-- Filter Column -->
+                    <div class="col-lg-3 mb-5 mb-lg-0" data-aos="fade-right">
+                        <div class="filter-options sticky-top" style="top: 150px;">
+                            <h5 class="premium-heading fs-6 mb-3 border-bottom pb-2">Filter By Category</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="categoryFilter" id="filterAll" value="All" checked onclick="filterProducts('All')">
+                                <label class="form-check-label" for="filterAll">
+                                    All Products
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="categoryFilter" id="filterSilk" value="Silk Weaves" onclick="filterProducts('Silk Weaves')">
+                                <label class="form-check-label" for="filterSilk">
+                                    Silk Weaves
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="categoryFilter" id="filterFestive" value="Festive" onclick="filterProducts('Festive')">
+                                <label class="form-check-label" for="filterFestive">
+                                    Festive Drapes
+                                </label>
+                            </div>
+                             <div class="form-check">
+                                <input class="form-check-input" type="radio" name="categoryFilter" id="filterBridal" value="Bridal" onclick="filterProducts('Bridal')">
+                                <label class="form-check-label" for="filterBridal">
+                                    Bridal Collection
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="categoryFilter" id="filterCotton" value="Cotton" onclick="filterProducts('Cotton')">
+                                <label class="form-check-label" for="filterCotton">
+                                    Handloom Cotton
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Grid Column -->
+                    <div class="col-lg-9">
+                        <div class="row g-4" id="product-grid">
+                            
+                            <!-- Product Card 1: Pink Banarasi -->
+                            <div class="col-12 col-sm-6 col-lg-4 product-card" data-category="Silk Weaves" data-product-id="1" data-aos="fade-up" data-aos-delay="100">
+                                <div class="card h-100 p-3">
+                                    <img src="https://ilovesarees.com/cdn/shop/files/Premium-Barbie-Pink-Banarasi-Silk-Saree-I-Love-Sarees1.webp?v=1727956731" class="card-img-top rounded-lg" alt="Banarasi Silk Saree" style="height: 400px; object-fit: cover; object-position: top;">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title premium-heading fs-6">Barbie Pink Banarasi</h5>
+                                        <p class="card-text text-muted mb-2">Premium silk with intricate zari.</p>
+                                        <p class="fs-5 fw-bold mb-3" style="color: var(--color-dark);">$489.00</p>
+                                        <button class="btn btn-primary add-to-cart-btn w-100" data-product-id="1">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Card 2: Traditional Green -->
+                            <div class="col-12 col-sm-6 col-lg-4 product-card" data-category="Bridal" data-product-id="2" data-aos="fade-up" data-aos-delay="200">
+                                <div class="card h-100 p-3">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI28eEWcyY3lyMGKkbQxWXmGLSmFfL0bcCYQ&s" class="card-img-top rounded-lg" alt="Kanjivaram Saree" style="height: 400px; object-fit: cover; object-position: top;">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title premium-heading fs-6">Traditional Kanjivaram</h5>
+                                        <p class="card-text text-muted mb-2">Classic green and red bridal weave.</p>
+                                        <p class="fs-5 fw-bold mb-3" style="color: var(--color-dark);">$620.50</p>
+                                        <button class="btn btn-primary add-to-cart-btn w-100" data-product-id="2">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Card 3: Printed Georgette -->
+                            <div class="col-12 col-sm-6 col-lg-4 product-card" data-category="Festive" data-product-id="3" data-aos="fade-up" data-aos-delay="300">
+                                <div class="card h-100 p-3">
+                                    <img src="https://www.sougatpaul.com/cdn/shop/files/SP4935_1.jpg?v=1757758230&width=2048" class="card-img-top rounded-lg" alt="Georgette Saree" style="height: 400px; object-fit: cover; object-position: top;">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title premium-heading fs-6">Designer Georgette</h5>
+                                        <p class="card-text text-muted mb-2">Modern print with fluid drape.</p>
+                                        <p class="fs-5 fw-bold mb-3" style="color: var(--color-dark);">$315.00</p>
+                                        <button class="btn btn-primary add-to-cart-btn w-100" data-product-id="3">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Card 4: Red/Gold Traditional -->
+                            <div class="col-12 col-sm-6 col-lg-4 product-card" data-category="Silk Weaves" data-product-id="4" data-aos="fade-up" data-aos-delay="400">
+                                <div class="card h-100 p-3">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOgY8bDtaZQmO61SEHv95Ut_-BXCYEyS4QxQ&s" class="card-img-top rounded-lg" alt="Patola Saree" style="height: 400px; object-fit: cover; object-position: top;">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title premium-heading fs-6">Patola Silk Blend</h5>
+                                        <p class="card-text text-muted mb-2">Rich red with traditional borders.</p>
+                                        <p class="fs-5 fw-bold mb-3" style="color: var(--color-dark);">$399.99</p>
+                                        <button class="btn btn-primary add-to-cart-btn w-100" data-product-id="4">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Card 5: Blue Maheshwari -->
+                            <div class="col-12 col-sm-6 col-lg-4 product-card" data-category="Cotton" data-product-id="5" data-aos="fade-up" data-aos-delay="150">
+                                <div class="card h-100 p-3">
+                                    <img src="https://maahishmati.com/cdn/shop/products/Maheshwari-Handloom-Silk-Saree-Isha-Maahishmati-Hamdloom-Sarees-Premium-Maheshwari-Sari-1.jpg?v=1652645743" class="card-img-top rounded-lg" alt="Maheshwari Silk" style="height: 400px; object-fit: cover; object-position: top;">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title premium-heading fs-6">Royal Maheshwari</h5>
+                                        <p class="card-text text-muted mb-2">Elegant blue with zari pallu.</p>
+                                        <p class="fs-5 fw-bold mb-3" style="color: var(--color-dark);">$280.00</p>
+                                        <button class="btn btn-primary add-to-cart-btn w-100" data-product-id="5">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Product Card 6: Gharchola Bandhani (Placeholder) -->
+                            <div class="col-12 col-sm-6 col-lg-4 product-card" data-category="Bridal" data-product-id="6" data-aos="fade-up" data-aos-delay="250">
+                                <div class="card h-100 p-3">
+                                    <img src="https://placehold.co/400x550/fff8e1/444?text=Gharchola+Bandhani" class="card-img-top rounded-lg" alt="Gharchola Saree" style="height: 400px; object-fit: cover;">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title premium-heading fs-6">Gharchola Bandhani</h5>
+                                        <p class="card-text text-muted mb-2">Tie-dye artistry, traditional Gujarati.</p>
+                                        <p class="fs-5 fw-bold mb-3" style="color: var(--color-dark);">$510.00</p>
+                                        <button class="btn btn-primary add-to-cart-btn w-100" data-product-id="6">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Product Card 7: Kerala Kasavu (Placeholder) -->
+                            <div class="col-12 col-sm-6 col-lg-4 product-card" data-category="Cotton" data-product-id="7" data-aos="fade-up" data-aos-delay="350">
+                                <div class="card h-100 p-3">
+                                    <img src="https://placehold.co/400x550/e9e6d8/444?text=Kasavu+Kerala" class="card-img-top rounded-lg" alt="Kasavu Saree" style="height: 400px; object-fit: cover;">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title premium-heading fs-6">Kerala Kasavu</h5>
+                                        <p class="card-text text-muted mb-2">Cream & gold simplicity.</p>
+                                        <p class="fs-5 fw-bold mb-3" style="color: var(--color-dark);">$350.00</p>
+                                        <button class="btn btn-primary add-to-cart-btn w-100" data-product-id="7">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Product Card 8: Pochampally Ikat (Placeholder) -->
+                            <div class="col-12 col-sm-6 col-lg-4 product-card" data-category="Silk Weaves" data-product-id="8" data-aos="fade-up" data-aos-delay="450">
+                                <div class="card h-100 p-3">
+                                    <img src="https://placehold.co/400x550/ffffff/444?text=Pochampally+Ikat" class="card-img-top rounded-lg" alt="Pochampally Saree" style="height: 400px; object-fit: cover;">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title premium-heading fs-6">Pochampally Ikat</h5>
+                                        <p class="card-text text-muted mb-2">Vibrant geometric design.</p>
+                                        <p class="fs-5 fw-bold mb-3" style="color: var(--color-dark);">$410.00</p>
+                                        <button class="btn btn-primary add-to-cart-btn w-100" data-product-id="8">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Offer Section -->
+        <section class="py-5 bg-white" id="offers" data-aos="zoom-in-up" style="margin-bottom: 0;">
+            <div class="container container-lg">
+                <h2 class="premium-heading text-center mb-5">
+                    Limited Time Offers
+                </h2>
+                <div id="offerCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner rounded-4 shadow-lg">
+                        <div class="carousel-item active">
+                            <img src="https://ilovesarees.com/cdn/shop/files/Premium-Barbie-Pink-Banarasi-Silk-Saree-I-Love-Sarees1.webp?v=1727956731" class="d-block w-100" alt="Offer 1" style="object-fit: cover; object-position: top; height: 350px;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                                <h3 class="premium-heading">Spring Wedding Festival</h3>
+                                <p>Flat 25% off on all Pink Banarasi weaves. Ends soon!</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://www.sougatpaul.com/cdn/shop/files/SP4935_1.jpg?v=1757758230&width=2048" class="d-block w-100" alt="Offer 2" style="object-fit: cover; object-position: top; height: 350px;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                                <h3 class="premium-heading">Designer Series</h3>
+                                <p>Explore the new Sougat Paul print collection.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#offerCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#offerCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-5 py-lg-7" id="testimonials">
+            <div class="container container-lg">
+                <h2 class="premium-heading text-center mb-5" data-aos="fade-down">
+                    Trusted By Our Customers
+                </h2>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4" data-aos="fade-right" data-aos-delay="100">
+                        <div class="testimonial-card">
+                            <i class="fas fa-quote-left fa-2x mb-3" style="color: var(--color-primary);"></i>
+                            <p class="fst-italic">"The quality of the Banarasi silk is unmatched. It arrived beautifully packaged and the colors are even richer in person."</p>
+                            <footer class="blockquote-footer mt-3">Anjali S. from Mumbai</footer>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="testimonial-card">
+                            <i class="fas fa-quote-left fa-2x mb-3" style="color: var(--color-primary);"></i>
+                            <p class="fst-italic">"My Kanjivaram was perfect for the wedding. The customer service was excellent and the shipping was fast."</p>
+                            <footer class="blockquote-footer mt-3">Priya R. from New York</footer>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-left" data-aos-delay="300">
+                        <div class="testimonial-card">
+                            <i class="fas fa-quote-left fa-2x mb-3" style="color: var(--color-primary);"></i>
+                            <p class="fst-italic">"I love my lightweight Chanderi! It drapes perfectly and is so comfortable. Highly recommend The Loom."</p>
+                            <footer class="blockquote-footer mt-3">Shalini K. from London</footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-5 mt-5 bg-white" id="footer">
+        <div class="container container-lg">
+            <div class="row text-start border-bottom pb-4 mb-4">
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <h5 class="premium-heading mb-3 fs-6">The Loom</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">Our Story</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Sustainability</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Careers</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Wholesale Inquiry</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <h5 class="premium-heading mb-3 fs-6">Customer Care</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">Shipping & Returns</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Size & Care Guide</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">FAQs</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <h5 class="premium-heading mb-3 fs-6">Legal & Policy</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Terms of Service</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Accessibility Statement</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-3 text-center text-lg-start">
+                     <h5 class="premium-heading mb-3 fs-6">Stay Connected</h5>
+                     <p class="text-muted">Sign up for exclusive offers and new collection alerts.</p>
+                     <div class="input-group mb-3">
+                         <input type="email" class="form-control rounded-start-pill" placeholder="Your Email">
+                         <button class="btn btn-primary rounded-end-pill">Subscribe</button>
+                     </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <p class="mb-3 text-muted">© 2025 The Heritage Loom. All Rights Reserved.</p>
+                <div class="social-icons fs-4">
+                    <a href="#" class="text-muted mx-3 footer-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-muted mx-3 footer-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-muted mx-3 footer-icon"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" class="text-muted mx-3 footer-icon"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Details Modal (Bootstrap Modal) -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title premium-heading" id="productModalLabel">Saree Detail View</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <img src="" class="img-fluid rounded-lg" alt="Detailed Saree View" id="modal-image">
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="premium-heading fs-2" id="modal-name">Product Name</h3>
+                            <p class="fs-4 fw-bold mb-3" id="modal-price" style="color: var(--color-primary);">$0.00</p>
+                            <p class="text-muted">SKU: LOOM-2025</p>
+                            <p id="modal-description">Description goes here.</p>
+                            <div class="d-flex align-items-center mb-4">
+                                <label for="quantity" class="form-label me-3 mb-0">Quantity:</label>
+                                <input type="number" id="quantity" class="form-control w-auto" value="1" min="1" max="5">
+                            </div>
+                            <!-- Updated button to trigger the cart logic -->
+                            <button class="btn btn-primary btn-lg w-100 modal-add-to-cart-btn" data-product-id="0">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        AOS.init({ duration: 1200, once: true });
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- GSAP and Visual Effects (Unchanged) ---
+        const mainHeader = document.getElementById('main-header');
+        const navBarNav = document.getElementById('navbarNav');
+        const navBrand = document.getElementById('main-logo');
+        
+        ScrollTrigger.create({
+            start: "top -=40", 
+            end: 99999,
+            onToggle: (self) => {
+                if (self.isActive) { 
+                    mainHeader.classList.add('scrolled');
+                    gsap.to(navBarNav, { duration: 0.2, opacity: 0, y: -10, onComplete: () => navBarNav.classList.add('menu-hidden') });
+                    if (window.innerWidth >= 992) gsap.to(navBrand, { duration: 0.3, fontSize: '1.75rem', x: 0, ease: "power2.out" });
+                } else { 
+                    mainHeader.classList.remove('scrolled');
+                    navBarNav.classList.remove('menu-hidden');
+                    gsap.to(navBarNav, { duration: 0.3, opacity: 1, y: 0, ease: "power2.out" });
+                    if (window.innerWidth >= 992) gsap.to(navBrand, { duration: 0.3, fontSize: '1.5rem', x: 0, ease: "power2.out" });
+                }
+            }
+        });
+
+        document.querySelectorAll('.cta-button, .add-to-cart-btn, .modal-add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => gsap.to(btn, { duration: 0.3, scale: 1.03 }));
+            btn.addEventListener('mouseleave', () => gsap.to(btn, { duration: 0.3, scale: 1 }));
+        });
+        document.querySelectorAll('.footer-icon').forEach(icon => {
+            gsap.set(icon, { color: 'var(--color-dark)' });
+            icon.addEventListener('mouseenter', () => gsap.to(icon, { duration: 0.4, rotation: 10, color: 'var(--color-primary)' }));
+            icon.addEventListener('mouseleave', () => gsap.to(icon, { duration: 0.4, rotation: 0, color: 'var(--color-dark)' }));
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from("#hero-headline", { duration: 1.5, y: 50, opacity: 0, ease: "power3.out", delay: 0.5 });
+            gsap.from(".hero-overlay p, .cta-button", { duration: 1, opacity: 0, y: 20, ease: "power2.out", stagger: 0.2, delay: 1.5 });
+            
+            // Attach event listeners to all 'Add to Cart' buttons in the grid
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = parseInt(e.currentTarget.getAttribute('data-product-id'));
+                    addToCart(productId, 1); // Add 1 item
+                });
+            });
+        });
+
+        // --- Cart and Product Logic (New/Updated) ---
+
+        // Mock Product Data with Categories
+        const mockProducts = [
+            { id: 1, name: "Barbie Pink Banarasi", price: 489.00, desc: "Premium silk with intricate zari.", img: "https://ilovesarees.com/cdn/shop/files/Premium-Barbie-Pink-Banarasi-Silk-Saree-I-Love-Sarees1.webp?v=1727956731", category: "Silk Weaves" },
+            { id: 2, name: "Traditional Kanjivaram", price: 620.50, desc: "Classic green and red bridal weave.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI28eEWcyY3lyMGKkbQxWXmGLSmFfL0bcCYQ&s", category: "Bridal" },
+            { id: 3, name: "Designer Georgette", price: 315.00, desc: "Modern print with fluid drape.", img: "https://www.sougatpaul.com/cdn/shop/files/SP4935_1.jpg?v=1757758230&width=2048", category: "Festive" },
+            { id: 4, name: "Patola Silk Blend", price: 399.99, desc: "Rich red with traditional borders.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOgY8bDtaZQmO61SEHv95Ut_-BXCYEyS4QxQ&s", category: "Silk Weaves" },
+            { id: 5, name: "Royal Maheshwari", price: 280.00, desc: "Elegant blue with zari pallu.", img: "https://maahishmati.com/cdn/shop/products/Maheshwari-Handloom-Silk-Saree-Isha-Maahishmati-Hamdloom-Sarees-Premium-Maheshwari-Sari-1.jpg?v=1652645743", category: "Cotton" },
+            { id: 6, name: "Gharchola Bandhani", price: 510.00, desc: "Tie-dye artistry, traditional Gujarati.", img: "https://placehold.co/600x800/fff8e1/444?text=Gharchola+Bandhani", category: "Bridal" },
+            { id: 7, name: "Kerala Kasavu", price: 350.00, desc: "Cream & gold simplicity.", img: "https://placehold.co/600x800/e9e6d8/444?text=Kasavu+Kerala", category: "Cotton" },
+            { id: 8, name: "Pochampally Ikat", price: 410.00, desc: "Vibrant geometric design.", img: "https://placehold.co/600x800/ffffff/444?text=Pochampally+Ikat", category: "Silk Weaves" }
+        ];
+
+        // Global Cart State
+        let cart = [];
+
+        // Function to update the cart counter in the header
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCountElement = document.getElementById('cart-count');
+            
+            // Update the counter text
+            cartCountElement.textContent = count;
+
+            // Optional: GSAP bounce animation for visual feedback
+            gsap.to(cartCountElement, { 
+                duration: 0.2, 
+                scale: 1.5, 
+                ease: "back.out(1.7)", 
+                yoyo: true, 
+                repeat: 1,
+                onComplete: () => gsap.to(cartCountElement, { scale: 1 }) 
+            });
+        }
+
+        // Function to add an item to the cart
+        function addToCart(productId, quantity = 1) {
+            const product = mockProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ id: productId, name: product.name, price: product.price, quantity: quantity });
+            }
+
+            updateCartCount();
+            console.log(`Added ${quantity} x ${product.name} to cart. Total items: ${cart.length}`);
+            
+            // Close modal if item added from modal
+            const modalElement = document.getElementById('productModal');
+            if (modalElement) {
+                 const modal = bootstrap.Modal.getInstance(modalElement);
+                 if (modal) modal.hide();
+            }
+        }
+
+
+        // Function to filter products based on category
+        function filterProducts(category) {
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                
+                if (category === 'All' || cardCategory === category) {
+                    card.style.display = 'block';
+                    card.setAttribute('data-aos', 'fade-up'); // Re-enable AOS
+                } else {
+                    card.style.display = 'none';
+                    card.removeAttribute('data-aos'); // Disable AOS for hidden elements
+                }
+            });
+        }
+
+        // Initialize filtering to 'All' on load
+        window.addEventListener('load', () => filterProducts('All'));
+
+
+        // --- Modal Logic (Updated) ---
+
+        const productModal = document.getElementById('productModal');
+        if (productModal) {
+            productModal.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget;
+                const productId = parseInt(button.getAttribute('data-product-id'));
+                const product = mockProducts.find(p => p.id === productId);
+
+                const modalAddButton = document.querySelector('.modal-add-to-cart-btn');
+                const modalQuantityInput = document.getElementById('quantity');
+
+                if (product) {
+                    document.getElementById('modal-name').textContent = product.name;
+                    document.getElementById('modal-price').textContent = `$${product.price.toFixed(2)}`;
+                    document.getElementById('modal-description').textContent = product.desc;
+                    document.getElementById('modal-image').src = product.img;
+                    modalAddButton.setAttribute('data-product-id', productId);
+                    modalQuantityInput.value = 1;
+
+                    // Bind 'Add to Cart' action in modal
+                    modalAddButton.onclick = () => {
+                        const quantity = parseInt(modalQuantityInput.value);
+                        addToCart(productId, quantity);
+                    };
+
+                } else if (productId === 0) {
+                     // Showcase default
+                    document.getElementById('modal-name').textContent = "The Loom Showcase";
+                    document.getElementById('modal-price').textContent = "Collection View";
+                    document.getElementById('modal-description').textContent = "Explore our finest handloom selection.";
+                    document.getElementById('modal-image').src = "https://www.manyavar.com/on/demandware.static/-/Library-Sites-ManyavarSharedLibrary/default/dwe6547122/Ace_Your_Saree_Banner_D.jpg";
+                    modalAddButton.style.display = 'none'; // Hide button for showcase mode
+                } else {
+                    modalAddButton.style.display = 'block'; 
+                }
+            });
+
+             productModal.addEventListener('hidden.bs.modal', () => {
+                 // Clean up the modal content and reset quantity
+                 document.getElementById('modal-name').textContent = 'Product Name';
+                 document.getElementById('modal-price').textContent = '$0.00';
+                 document.getElementById('modal-description').textContent = 'Description goes here.';
+                 document.getElementById('modal-image').src = '';
+                 document.getElementById('quantity').value = 1;
+             });
+        }
+    </script>
+</body>
+</html>

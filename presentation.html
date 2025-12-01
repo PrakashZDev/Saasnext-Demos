@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategic Mutual Fund Campaign Presentation - Enhanced</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+  /* Base Styles */
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: #111827; /* Darker background */
+    color: #f3f4f6; /* Light text */
+    overflow-x: hidden;
+  }
+
+  /* Keyframe for subtle border glow animation */
+  @keyframes border-glow {
+    0% { box-shadow: 0 0 5px #f97316; }
+    50% { box-shadow: 0 0 15px #e9701f, 0 0 5px rgba(233, 112, 31, 0.5); }
+    100% { box-shadow: 0 0 5px #f97316; }
+  }
+
+  .presentation {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    width: 95%;
+    max-width: 1200px;
+    min-height: 80vh;
+    padding: clamp(30px, 5vw, 60px); /* Responsive padding */
+    margin: 30px 0;
+    background: #1f2937; /* Slightly lighter slide background */
+    border: 3px solid #e9701f;
+    border-radius: 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all 0.5s ease-in-out;
+    animation: border-glow 6s infinite alternate; /* Applied animation */
+  }
+
+  .slide.active {
+    display: flex;
+  }
+
+  /* Typography - BIGGER FLUID FONTS (using clamp) */
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem); /* Bigger H1 */
+    font-weight: 900;
+    color: #f97316; /* Bright Orange */
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem); /* Bigger H2 */
+    font-weight: 800;
+    color: #ffffff;
+    border-bottom: 3px solid #e9701f;
+    padding-bottom: 10px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: clamp(1.6rem, 3vw, 2rem); /* Bigger H3 */
+    font-weight: 700;
+    color: #f97316;
+    margin-top: 20px;
+  }
+
+  p, li {
+    font-size: clamp(1.1rem, 2vw, 1.4rem); /* 18px to 22px */
+    line-height: 1.7;
+    margin-bottom: 15px;
+  }
+
+  ul, ol {
+    padding-left: clamp(20px, 4vw, 40px);
+    list-style-type: disc;
+  }
+  
+  ul li {
+    padding-left: 10px;
+  }
+
+  /* Table styles enhancement */
+  table {
+    margin-top: 30px;
+    border: 3px solid #f97316;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  th, td {
+    padding: 15px;
+    border: 1px solid rgba(233, 112, 31, 0.4);
+  }
+
+  th {
+    background: #f97316;
+    color: #111827;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  /* Navigation Buttons */
+  .nav-buttons {
+    position: fixed;
+    bottom: 30px;
+    display: flex;
+    gap: 20px;
+    z-index: 10;
+  }
+
+  .nav-buttons button {
+    background: #f97316;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-buttons button:hover {
+    background: #ea580c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-buttons button:active {
+    transform: translateY(1px);
+  }
+
+  /* Chart Container */
+  .chart-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+    background: #0f172a; /* Dark background for chart */
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  /* Two-Part Structure Styling */
+  .comparison-box {
+    border-radius: 12px;
+    padding: 20px;
+    transition: background 0.3s;
+  }
+  .old-campaign {
+    border: 2px solid #dc2626; /* Red border for old */
+    background: #450a0a; /* Dark red background */
+  }
+  .new-campaign {
+    border: 2px solid #10b981; /* Green border for new */
+    background: #064e3b; /* Dark green background */
+  }
+
+  /* Mobile Adjustments */
+  @media (max-width: 768px) {
+    .slide {
+      padding: 20px 15px;
+      margin: 15px 0;
+      min-height: 90vh; 
+    }
+    .nav-buttons {
+      bottom: 15px;
+      gap: 10px;
+    }
+    .nav-buttons button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .chart-container {
+      width: 100%;
+      padding: 10px;
+      height: 350px; /* Adjusted height for smaller screens */
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="presentation">
+
+  <!-- Slide 1: Title & Logo -->
+  <div class="slide active">
+    <img src="https://saasnext.in/_next/image?url=%2Fsaaasnext.png&w=256&q=75" alt="Saasnext Logo" class="h-20 w-auto mx-auto mb-8 rounded-lg"/>
+    <h1 class="text-center">Strategic Mutual Fund Campaign Proposal</h1>
+    <h2 class="text-center mt-5">Optimizing Reach & Engagement for NJ Wealth & Rank MF</h2>
+    <p class="text-center text-xl mt-10">Presented by: <span class="text-orange-400 font-bold">Saasnext</span></p>
+    <div class="flex-grow flex items-center justify-center mt-10">
+      <p class="text-gray-400 italic">Use the arrow keys or "Next" button to navigate.</p>
+    </div>
+  </div>
+
+  <!-- Slide 2: Objective -->
+  <div class="slide">
+    <h2>Campaign Objectives - Precision & ROI</h2>
+    <p>Our strategic goal is to move from broad awareness to highly qualified engagement, ensuring every marketing dollar yields maximum return.</p>
+    <ul>
+      <li><strong>Maximize Performance:</strong> Drive measurable results for both NJ Wealth & Rank MF funds.</li>
+      <li><strong>Targeted Reach:</strong> Utilize demographic and behavioral data to reach the most relevant distributors and investors.</li>
+      <li><strong>Improve Engagement & Quality:</strong> Increase CTR and lead quality by personalizing creative assets and messaging.</li>
+      <li><strong>Optimize ROI:</strong> Implement continuous optimization loops to maximize return on ad spend (ROAS).</li>
+    </ul>
+  </div>
+
+  <!-- Slide 3: Old Campaign Analysis (Two-Part Structure) -->
+  <div class="slide">
+    <h2>Campaign Structure: Key Elements & Challenges</h2>
+    <p>The previous approach, while simple to execute, suffered from lack of granularity in targeting and messaging.</p>
+    
+    <div class="flex flex-col md:flex-row gap-8 mt-8">
+        <!-- Part 1: Key Elements (Old Campaign) -->
+        <div class="w-full md:w-1/2 p-6 comparison-box old-campaign">
+            <h3 class="text-red-400 border-b border-red-500 pb-2 mb-4">❌ Old Campaign Structure</h3>
+            <p>A broad, one-size-fits-all approach:</p>
+            <ul>
+                <li><strong>Scope:</strong> 2 campaigns running independently.</li>
+                <li><strong>Audience:</strong> General targeting of "All India mutual fund distributors."</li>
+                <li><strong>Creative:</strong> Only 1 static creative per fund, leading to quick fatigue.</li>
+            </ul>
+        </div>
+        
+        <!-- Part 2: Challenges (Old Campaign) -->
+        <div class="w-full md:w-1/2 p-6 comparison-box old-campaign">
+            <h3 class="text-red-400 border-b border-red-500 pb-2 mb-4">🛑 Challenges Identified</h3>
+            <p>The lack of focus resulted in significant inefficiencies:</p>
+            <ul>
+                <li><strong>Low Engagement:</strong> Broad targeting dilutes relevance.</li>
+                <li><strong>Creative Fatigue:</strong> Limited variety failed to capture diverse attention.</li>
+                <li><strong>Inefficient Spend:</strong> Budget allocation was non-specific and difficult to optimize.</li>
+            </ul>
+        </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: New Strategy (Two-Part Structure: Old vs New Philosophy) -->
+  <div class="slide">
+    <h2>The Strategic Shift: From Mass Marketing to Precision Targeting</h2>
+    
+    <div class="flex flex-col md:flex-row gap-8 mt-8">
+        <!-- Part 1: Old Approach Philosophy -->
+        <div class="w-full md:w-1/2 p-6 comparison-box old-campaign">
+            <h3 class="text-red-400 border-b border-red-500 pb-2 mb-4">📉 Old Campaign Philosophy (Volume)</h3>
+            <p class="mt-4 italic text-lg">"Maximize visibility by reaching every possible distributor/investor, regardless of location or specific need."</p>
+            <ul class="list-none pt-4">
+                <li class="flex items-center"><span class="text-red-500 mr-2 text-2xl">➖</span> Focus on high impression counts</li>
+                <li class="flex items-center"><span class="text-red-500 mr-2 text-2xl">➖</span> Undifferentiated messaging</li>
+            </ul>
+        </div>
+        
+        <!-- Part 2: New Approach Philosophy -->
+        <div class="w-full md:w-1/2 p-6 comparison-box new-campaign">
+            <h3 class="text-green-400 border-b border-green-500 pb-2 mb-4">📈 New Strategic Approach (ROI)</h3>
+            <p class="mt-4 italic text-lg">"Maximize efficiency by focusing budget on high-propensity segments with hyper-relevant content."</p>
+            <ul class="list-none pt-4">
+                <li class="flex items-center"><span class="text-green-500 mr-2 text-2xl">➕</span> Focus on quality & conversion</li>
+                <li class="flex items-center"><span class="text-green-500 mr-2 text-2xl">➕</span> Creative Multiplicity & Personalization</li>
+            </ul>
+        </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Old vs New Chart -->
+  <div class="slide">
+    <h2>Campaign Structure Comparison – Old vs New</h2>
+    <p class="text-center text-gray-300">Comparing the complexity and potential reach optimization across critical campaign dimensions.</p>
+    <div class="chart-container">
+      <canvas id="campaignChart"></canvas>
+      <p class="text-sm text-gray-400 mt-4 text-center">Note: Scores are relative measures of depth and flexibility (1 = Low/Broad, 5 = High/Focused).</p>
+    </div>
+  </div>
+
+  <!-- Slide 6: Target Audience (Two-Part Structure) -->
+  <div class="slide">
+    <h2>Refined Target Audience Segmentation</h2>
+    
+    <div class="flex flex-col md:flex-row gap-8 mt-8">
+        <!-- Part 1: Previous Target -->
+        <div class="w-full md:w-1/2 p-6 comparison-box old-campaign">
+            <h3 class="text-red-400 border-b border-red-500 pb-2 mb-4">Previous Target: Broad & Undifferentiated</h3>
+            <p class="mt-4 font-semibold text-2xl text-center">"All India Mutual Fund Distributors"</p>
+            <ul class="list-none pt-4">
+                <li class="text-gray-200">- High waste in Tier 3/4 cities</li>
+                <li class="text-gray-200">- Lack of market context</li>
+            </ul>
+        </div>
+        
+        <!-- Part 2: New Strategy -->
+        <div class="w-full md:w-1/2 p-6 comparison-box new-campaign">
+            <h3 class="text-green-400 border-b border-green-500 pb-2 mb-4">New Strategy: Hyper-Focused & Actionable</h3>
+            <ol class="list-decimal list-inside mt-4">
+              <li><strong>Geographic Focus:</strong> Prioritize Tier-1 & Tier-2 metro cities.</li>
+              <li><strong>Demographic Overlay:</strong> Target based on professional tenure and business size.</li>
+              <li><strong>Behavioral Data:</strong> Users showing active interest in high-value financial products.</li>
+            </ol>
+        </div>
+    </div>
+    <p class="mt-6 text-gray-300 text-center">This refinement minimizes wasted impressions and maximizes the likelihood of attracting high-quality leads.</p>
+  </div>
+
+  <!-- Slide 7: Creative Strategy -->
+  <div class="slide">
+    <h2>Dynamic Creative Strategy & Messaging Personalization </h2>
+    <p>Moving beyond generic ads to highly relevant, localized content to maximize CTR.</p>
+
+    <h3 class="mt-4">Localized and Value-Driven Messaging Examples</h3>
+    <table class="text-lg">
+      <thead>
+        <tr>
+          <th>Fund</th>
+          <th>Audience Segment</th>
+          <th>Localized Creative Hook</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>NJ Wealth</td>
+          <td>Mumbai Distributors</td>
+          <td>"Unlock Premium Services for your HNI Clients in Mumbai."</td>
+        </tr>
+        <tr>
+          <td>Rank MF</td>
+          <td>Pune Investors</td>
+          <td>"Top-Tier Growth Funds with Proven Returns for Pune's Tech Professionals."</td>
+        </tr>
+        <tr>
+          <td>Both</td>
+          <td>New Distributors</td>
+          <td>"Your First $1M: Training & Support for New MF Professionals."</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Slide 8: Optimization -->
+  <div class="slide">
+    <h2>Optimization & Iterative Improvement Framework (The Feedback Loop)</h2>
+    <p>The campaign is not static; it is a continuously evolving system driven by performance data.</p>
+    <ol>
+      <li><strong>Phase 1: Launch & Baseline (Week 1):</strong> Launch 5 segments (e.g., Mumbai, Bangalore, Pune, etc.) with 3 creatives each.</li>
+      <li><strong>Phase 2: A/B Testing & Analysis (Week 2):</strong> Identify the top 2 performing cities and the best 1 creative in each.</li>
+      <li><strong>Phase 3: Budget Reallocation (Week 3):</strong> Shift 60% of the budget towards the top performers. Pause underperforming segments.</li>
+      <li><strong>Phase 4: Expansion & Scaling (Ongoing):</strong> Introduce new Tier-2 cities or new creative variants based on proven winners.</li>
+    </ol>
+    <p class="mt-6 text-orange-400 font-bold">This ensures we fail fast on low performers and scale aggressively on high-ROI segments.</p>
+  </div>
+
+  <!-- Slide 9: Expected Benefits -->
+  <div class="slide">
+    <h2>Expected Benefits & Projected Impact</h2>
+    <p class="text-center text-gray-300">A balanced approach focused on sustainable quality improvement across all metrics.</p>
+    <div class="chart-container">
+      <canvas id="benefitChart"></canvas>
+    </div>
+    <ul class="flex flex-wrap justify-around gap-4 mt-4">
+      <li class="font-bold text-orange-400">Targeting: ⬆ 80% more precise</li>
+      <li class="font-bold text-orange-400">Lead Quality: ⬆ 40% improvement</li>
+      <li class="font-bold text-orange-400">Cost per Lead: ⬇ 25% reduction</li>
+    </ul>
+  </div>
+
+  <!-- Slide 10: Conclusion -->
+  <div class="slide">
+    <h2>Summary: From General to Hyper-Specific</h2>
+    <p>We are confident that this shift in strategy will significantly elevate the performance of the NJ Wealth and Rank MF campaigns.</p>
+    <div class="mt-4 space-y-3 text-lg">
+      <p>The focus is now on **Segmentation** (who we talk to) and **Personalization** (what we say).</p>
+      <p>The framework guarantees **Continuous Optimization** driven by real-time data.</p>
+      <p>This delivers a **Measurable ROI** by prioritizing quality engagement over broad reach.</p>
+    </div>
+    <h3 class="mt-8 text-center">Thank You!</h3>
+    <p class="text-center text-orange-400 mt-4 text-2xl font-semibold">Questions & Discussion</p>
+  </div>
+
+</div>
+
+<div class="nav-buttons">
+  <button id="prev">Previous</button>
+  <button id="next">Next</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Initializing Firebase variables, though they are not used for this static presentation
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+
+// Function to handle slide display with transition effects
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('active');
+    // Start transition state
+    slide.style.opacity = '0';
+    slide.style.transform = 'scale(0.98)';
+    if(i === index) {
+      slide.classList.add('active');
+      // End transition state after a slight delay
+      setTimeout(() => {
+        slide.style.opacity = '1';
+        slide.style.transform = 'scale(1)';
+      }, 50); 
+    }
+  });
+}
+
+// Navigation Handlers
+document.getElementById('next').addEventListener('click', () => {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+});
+
+document.getElementById('prev').addEventListener('click', () => {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+});
+
+// Keyboard Navigation
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'ArrowRight' || e.key === ' ') { // Space or Right Arrow for next
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  } else if(e.key === 'ArrowLeft') { // Left Arrow for previous
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+  }
+});
+
+// Initial slide show
+window.onload = function() {
+  showSlide(0);
+};
+
+// Charts configuration for the dark theme
+const commonChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: { labels: { color: '#f3f4f6', font: { size: 14 } } },
+        tooltip: { titleFont: { size: 14 }, bodyFont: { size: 14 } }
+    },
+    scales: {
+        x: { 
+            ticks: { color: '#f97316', font: { size: 14 } }, 
+            grid: { color: 'rgba(249, 115, 22, 0.2)' } 
+        },
+        y: { 
+            ticks: { color: '#f3f4f6', font: { size: 14 } },
+            grid: { color: 'rgba(249, 115, 22, 0.2)' } 
+        }
+    }
+};
+
+const ctx1 = document.getElementById('campaignChart').getContext('2d');
+const campaignChart = new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: ['Creatives', 'Audience Depth', 'Location Focus', 'Optimization Loops', 'Personalization Score'],
+    datasets: [
+      { label: 'Old Campaign (Broad)', data: [1, 1, 1, 1, 1], backgroundColor: '#dc2626', borderColor: '#dc2626' },
+      { label: 'New Campaign (Targeted)', data: [5, 4, 5, 4, 5], backgroundColor: '#10b981', borderColor: '#10b981' }
+    ]
+  },
+  options: commonChartOptions
+});
+
+const ctx2 = document.getElementById('benefitChart').getContext('2d');
+const benefitChart = new Chart(ctx2, {
+  type: 'doughnut',
+  data: {
+    labels: ['Higher Lead Quality (30%)', 'Increased Engagement (25%)', 'Optimized Spend (25%)', 'Continuous Improvement (20%)'],
+    datasets: [{
+      label: 'Expected Benefits',
+      data: [30, 25, 25, 20],
+      backgroundColor: ['#f97316','#10b981','#e9701f','#f3f4f6'],
+      borderColor: '#1f2937',
+      hoverOffset: 10
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: { labels: { color: '#f3f4f6', font: { size: 14 } } },
+        tooltip: { titleFont: { size: 14 }, bodyFont: { size: 14 } }
+    }
+  }
+});
+
+// Set Chart Container height for responsiveness
+document.querySelectorAll('.chart-container').forEach(container => {
+    container.style.height = '400px';
+});
+
+</script>
+
+</body>
+</html>   
